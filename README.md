@@ -1,3 +1,11 @@
+# 🎥 Project Demo Video
+
+**YouTube Demo:** https://youtu.be/b6UU-0SX_9k
+
+[▶ Watch Recruitment Pipeline Automation Demo](https://youtu.be/b6UU-0SX_9k)
+
+---
+
 # Task: Build and Correct an n8n Recruitment Pipeline Automation Workflow
 
 I want you to create a complete, professional, and fully functional **Recruitment Pipeline Automation** workflow in n8n.
@@ -170,3 +178,5 @@ The JSON must be valid and directly importable into n8n.
 Preserve the complete workflow functionality, node connections, expressions, routing logic, and email notification structure.
 
 Do not omit any essential nodes or replace the actual workflow with pseudocode or a written explanation.
+
+Also provide an updated README.md containing the project overview, key features, technologies used, screenshots, installation instructions, and YouTube demo video link.
