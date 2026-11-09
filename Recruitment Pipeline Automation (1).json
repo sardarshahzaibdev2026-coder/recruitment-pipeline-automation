@@ -1,0 +1,1367 @@
+{
+  "name": "Recruitment Pipeline Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Job Application Form",
+        "formDescription": "Apply for a job by submitting your details",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Full Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email Address",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Phone Number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Job Position",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Resume Link",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        -352,
+        -704
+      ],
+      "id": "75e75ffa-7a70-42b7-8e85-bdf0057c2d73",
+      "name": "Job Application Form",
+      "webhookId": "755ba978-7a75-45d9-8e72-b032c53c2577"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appr8Hna7hyI6n8hR",
+          "mode": "list",
+          "cachedResultName": "Recruitment Pipeline",
+          "cachedResultUrl": "https://airtable.com/appr8Hna7hyI6n8hR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblK011vI6KjjhOGZ",
+          "mode": "list",
+          "cachedResultName": "Candidates",
+          "cachedResultUrl": "https://airtable.com/appr8Hna7hyI6n8hR/tblK011vI6KjjhOGZ"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Phone Number": "={{ $json['Phone Number'] }}",
+            "Job Position": "={{ $json['Job Position'] }}",
+            "Resume Link": "={{ $json['Resume Link'] }}",
+            "Email Address": "={{ $json['Email Address'] }}",
+            "Full Name": "={{ $json[\"Full Name\"] }}",
+            "Stage": "Applied"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email Address",
+              "displayName": "Email Address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job Position",
+              "displayName": "Job Position",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Resume Link",
+              "displayName": "Resume Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Applied",
+                  "value": "Applied"
+                },
+                {
+                  "name": "Shortlisted",
+                  "value": "Shortlisted"
+                },
+                {
+                  "name": "Interview",
+                  "value": "Interview"
+                },
+                {
+                  "name": "Selected",
+                  "value": "Selected"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Modified Time",
+              "displayName": "Last Modified Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Stage Updated At",
+              "displayName": "Stage Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Email Sent Stage",
+              "displayName": "Email Sent Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        -128,
+        -704
+      ],
+      "id": "9fc29c8e-2d2e-45cb-975b-233c2de30ff7",
+      "name": "Save Candidate to Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "sFaA0F8jDU84qVxX",
+          "name": "Airtable Personal Access Token account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -352,
+        -192
+      ],
+      "id": "4999f884-0a23-4ccc-befb-0103debfe7ad",
+      "name": "Check Candidate Status"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "mode": "id",
+          "value": "appr8Hna7hyI6n8hR"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "id",
+          "value": "tblK011vI6KjjhOGZ"
+        },
+        "filterByFormula": "AND(   {Stage} != 'Applied',   {Stage} != {Email Sent Stage},   {Email Address} != BLANK() )",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        -128,
+        -192
+      ],
+      "id": "854281e7-160e-4517-acc2-0a944126f2f9",
+      "name": "Find Candidates for Email",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "sFaA0F8jDU84qVxX",
+          "name": "Airtable Personal Access Token account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "fb95a840-2b76-42f4-ba4c-b5712b5895be",
+              "leftValue": "={{ $json.fields.Stage }}",
+              "rightValue": "Applied",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "05befd70-4545-408d-9609-c1168d4312dc",
+              "leftValue": "={{ $json.fields.Stage }}",
+              "rightValue": "={{ $json.fields[\"Email Sent Stage\"] || \"\" }}",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        96,
+        -192
+      ],
+      "id": "b3d05c69-1c7a-4b09-9515-217b6b155220",
+      "name": "Check Email Eligibility"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.fields.Stage }}",
+                    "rightValue": "Shortlisted",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "e6638f53-1ce0-427f-bf17-8606c0ce1be5"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d1e22fbb-26b9-4088-a1b2-725a61c7d352",
+                    "leftValue": "={{ $json.fields.Stage }}",
+                    "rightValue": "Interview",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "a92ed2a3-ae16-4465-9404-8b79eb5f4529",
+                    "leftValue": "={{ $json.fields.Stage }}",
+                    "rightValue": "Selected",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "695c352f-3250-4609-b7f5-77ddc3b62d68",
+                    "leftValue": "={{ $json.fields.Stage }}",
+                    "rightValue": "Rejected",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        -224
+      ],
+      "id": "957542f2-20d1-4e9d-b7fc-9e6c3591e1fd",
+      "name": "Route by Candidate Status"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.fields[\"Email Address\"] }}",
+        "subject": "Congratulations! You Have Been Shortlisted",
+        "message": "=Dear {{ $json.fields[\"Full Name\"] }},  Congratulations!  We are pleased to inform you that your application for the {{ $json.fields[\"Job Position\"] }} position has been shortlisted.  Our recruitment team will contact you soon with further details.  Thank you for your interest.  Best regards, HR Recruitment Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        544,
+        -480
+      ],
+      "id": "8fe10b1b-f55c-45e2-906b-b0c8fb63ee8c",
+      "name": "Send Shortlisted Email",
+      "webhookId": "181f3934-d294-4ab4-af43-ddd783da3c63",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "VA0IJbApuwkx4dfR",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appr8Hna7hyI6n8hR",
+          "mode": "list",
+          "cachedResultName": "Recruitment Pipeline",
+          "cachedResultUrl": "https://airtable.com/appr8Hna7hyI6n8hR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblK011vI6KjjhOGZ",
+          "mode": "list",
+          "cachedResultName": "Candidates",
+          "cachedResultUrl": "https://airtable.com/appr8Hna7hyI6n8hR/tblK011vI6KjjhOGZ"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Find Candidates for Email').item.json.id }}",
+            "Email Sent Stage": "={{ $('Find Candidates for Email').item.json.fields.Stage }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email Address",
+              "displayName": "Email Address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Job Position",
+              "displayName": "Job Position",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Resume Link",
+              "displayName": "Resume Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Applied",
+                  "value": "Applied"
+                },
+                {
+                  "name": "Shortlisted",
+                  "value": "Shortlisted"
+                },
+                {
+                  "name": "Interview",
+                  "value": "Interview"
+                },
+                {
+                  "name": "Selected",
+                  "value": "Selected"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Modified Time",
+              "displayName": "Last Modified Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Stage Updated At",
+              "displayName": "Stage Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Email Sent Stage",
+              "displayName": "Email Sent Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        768,
+        -480
+      ],
+      "id": "3d876492-64c6-48e0-985c-4fc567c9fbde",
+      "name": "Mark Shortlisted Email Sent",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "sFaA0F8jDU84qVxX",
+          "name": "Airtable Personal Access Token account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.fields[\"Email Address\"] }}",
+        "subject": "Interview Invitation – Recruitment Team",
+        "message": "={{ 'Dear ' + $json.fields[\"Full Name\"] + ',\\n\\nWe are pleased to invite you for an interview for the ' + $json.fields[\"Job Position\"] + ' position. Our recruitment team will contact you with the interview date and time.\\n\\nBest regards,\\nHR Recruitment Team' }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        544,
+        -288
+      ],
+      "id": "aa010111-a5da-4506-ac22-9ef43713cc2d",
+      "name": "Send Interview Invitation",
+      "webhookId": "4a644346-8d4a-41ef-b5cc-d69564aa8512",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "VA0IJbApuwkx4dfR",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appr8Hna7hyI6n8hR",
+          "mode": "list",
+          "cachedResultName": "Recruitment Pipeline",
+          "cachedResultUrl": "https://airtable.com/appr8Hna7hyI6n8hR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblK011vI6KjjhOGZ",
+          "mode": "list",
+          "cachedResultName": "Candidates",
+          "cachedResultUrl": "https://airtable.com/appr8Hna7hyI6n8hR/tblK011vI6KjjhOGZ"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Find Candidates for Email').item.json.id }}",
+            "Email Sent Stage": "={{ $('Find Candidates for Email').item.json.fields.Stage }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email Address",
+              "displayName": "Email Address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Job Position",
+              "displayName": "Job Position",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Resume Link",
+              "displayName": "Resume Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Applied",
+                  "value": "Applied"
+                },
+                {
+                  "name": "Shortlisted",
+                  "value": "Shortlisted"
+                },
+                {
+                  "name": "Interview",
+                  "value": "Interview"
+                },
+                {
+                  "name": "Selected",
+                  "value": "Selected"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Modified Time",
+              "displayName": "Last Modified Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Stage Updated At",
+              "displayName": "Stage Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Email Sent Stage",
+              "displayName": "Email Sent Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        768,
+        -288
+      ],
+      "id": "e4bd12f3-8db1-4598-8bb8-18518a00637f",
+      "name": "Mark Interview Email Sent",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "sFaA0F8jDU84qVxX",
+          "name": "Airtable Personal Access Token account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.fields[\"Email Address\"] }}",
+        "subject": "Congratulations! You Are Selected",
+        "message": "={{ 'Dear ' + $json.fields[\"Full Name\"] + ',\\n\\nCongratulations! We are pleased to inform you that you have been selected for the ' + $json.fields[\"Job Position\"] + ' position.\\n\\nOur recruitment team will contact you with the next steps.\\n\\nBest regards,\\nHR Recruitment Team' }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        544,
+        -96
+      ],
+      "id": "84a350a2-4c2b-428a-8119-9e213450bead",
+      "name": "Send Selection Email",
+      "webhookId": "fc4bcb76-334d-4781-99ae-1ee8ea66ddac",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "VA0IJbApuwkx4dfR",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appr8Hna7hyI6n8hR",
+          "mode": "list",
+          "cachedResultName": "Recruitment Pipeline",
+          "cachedResultUrl": "https://airtable.com/appr8Hna7hyI6n8hR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblK011vI6KjjhOGZ",
+          "mode": "list",
+          "cachedResultName": "Candidates",
+          "cachedResultUrl": "https://airtable.com/appr8Hna7hyI6n8hR/tblK011vI6KjjhOGZ"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Find Candidates for Email').item.json.id }}",
+            "Email Sent Stage": "={{ $('Find Candidates for Email').item.json.fields.Stage }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email Address",
+              "displayName": "Email Address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Job Position",
+              "displayName": "Job Position",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Resume Link",
+              "displayName": "Resume Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Applied",
+                  "value": "Applied"
+                },
+                {
+                  "name": "Shortlisted",
+                  "value": "Shortlisted"
+                },
+                {
+                  "name": "Interview",
+                  "value": "Interview"
+                },
+                {
+                  "name": "Selected",
+                  "value": "Selected"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Modified Time",
+              "displayName": "Last Modified Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Stage Updated At",
+              "displayName": "Stage Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Email Sent Stage",
+              "displayName": "Email Sent Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        768,
+        -96
+      ],
+      "id": "21450eae-9614-49b3-95e6-581500188b84",
+      "name": "Mark Selection Email Sent",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "sFaA0F8jDU84qVxX",
+          "name": "Airtable Personal Access Token account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.fields[\"Email Address\"] }}",
+        "subject": "Update on Your Job Application",
+        "message": "={{ 'Dear ' + $json.fields[\"Full Name\"] + ',\\n\\nThank you for applying for the ' + $json.fields[\"Job Position\"] + ' position.\\n\\nAfter careful consideration, we regret to inform you that your application has not been selected for this position. We appreciate your interest and wish you success in your future opportunities.\\n\\nBest regards,\\nHR Recruitment Team' }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        544,
+        96
+      ],
+      "id": "93aa4621-3b74-4940-acc1-5560a8d08370",
+      "name": "Send Rejection Email",
+      "webhookId": "5ae0efa8-6b8c-496e-8b07-2c5679309bb6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "VA0IJbApuwkx4dfR",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appr8Hna7hyI6n8hR",
+          "mode": "list",
+          "cachedResultName": "Recruitment Pipeline",
+          "cachedResultUrl": "https://airtable.com/appr8Hna7hyI6n8hR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblK011vI6KjjhOGZ",
+          "mode": "list",
+          "cachedResultName": "Candidates",
+          "cachedResultUrl": "https://airtable.com/appr8Hna7hyI6n8hR/tblK011vI6KjjhOGZ"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Find Candidates for Email').item.json.id }}",
+            "Email Sent Stage": "=={{ $('Find Candidates for Email').item.json.fields.Stage }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email Address",
+              "displayName": "Email Address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Job Position",
+              "displayName": "Job Position",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Resume Link",
+              "displayName": "Resume Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Applied",
+                  "value": "Applied"
+                },
+                {
+                  "name": "Shortlisted",
+                  "value": "Shortlisted"
+                },
+                {
+                  "name": "Interview",
+                  "value": "Interview"
+                },
+                {
+                  "name": "Selected",
+                  "value": "Selected"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Modified Time",
+              "displayName": "Last Modified Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Stage Updated At",
+              "displayName": "Stage Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Email Sent Stage",
+              "displayName": "Email Sent Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        768,
+        96
+      ],
+      "id": "c0b8e338-41d5-4f41-8938-6cb440d084e9",
+      "name": "Mark Rejection Email Sent",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "sFaA0F8jDU84qVxX",
+          "name": "Airtable Personal Access Token account 4"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Job Application Form": {
+      "main": [
+        [
+          {
+            "node": "Save Candidate to Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Candidate Status": {
+      "main": [
+        [
+          {
+            "node": "Find Candidates for Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Candidates for Email": {
+      "main": [
+        [
+          {
+            "node": "Check Email Eligibility",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Email Eligibility": {
+      "main": [
+        [
+          {
+            "node": "Route by Candidate Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Candidate Status": {
+      "main": [
+        [
+          {
+            "node": "Send Shortlisted Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Interview Invitation",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Selection Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Rejection Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Shortlisted Email": {
+      "main": [
+        [
+          {
+            "node": "Mark Shortlisted Email Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Interview Invitation": {
+      "main": [
+        [
+          {
+            "node": "Mark Interview Email Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Interview Email Sent": {
+      "main": [
+        []
+      ]
+    },
+    "Send Selection Email": {
+      "main": [
+        [
+          {
+            "node": "Mark Selection Email Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Rejection Email": {
+      "main": [
+        [
+          {
+            "node": "Mark Rejection Email Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2cc44060-3e80-4b43-8e5e-c0ab0c43a223",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6e09abedfd28e85ac261ad9898070b7bd18a6bacefa80cf22df0369b64fe23b9"
+  },
+  "nodeGroups": [],
+  "id": "JRI3rUyKV49ggY3w",
+  "tags": []
+}
